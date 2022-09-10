@@ -12,6 +12,7 @@ services:
       - .:/home/node/app
     networks:
       - app-network
+      - rabbitmq_micro-catalog
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
@@ -50,3 +51,5 @@ services:
 networks:
   app-network:
     driver: bridge
+  rabbitmq_micro-catalog:
+    external: true
