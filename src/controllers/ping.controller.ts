@@ -1,6 +1,6 @@
 import {inject} from '@loopback/core';
+import {ClassDecoratorFactory, MetadataInspector} from "@loopback/metadata";
 import {get, Request, ResponseObject, RestBindings} from '@loopback/rest';
-
 /**
  * OpenAPI response for ping()
  */
@@ -28,9 +28,23 @@ const PING_RESPONSE: ResponseObject = {
   },
 };
 
+interface MyClassMetaData {
+  name: string
+}
+
+function myClassDecarator(spec: MyClassMetaData): ClassDecorator {
+  const factory = new ClassDecoratorFactory<MyClassMetaData>(
+    'meta-data-my-class-decarator',
+    spec
+  )
+
+  return factory.create();
+}
+
 /**
  * A simple controller to bounce back http requests
  */
+@myClassDecarator({name: 'code education'})
 export class PingController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
 
@@ -50,3 +64,10 @@ export class PingController {
     };
   }
 }
+
+const meta = MetadataInspector.getClassMetadata<MyClassMetaData>(
+  'meta-data-my-class-decarator',
+  PingController
+)
+
+console.log(meta);
