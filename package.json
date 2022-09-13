@@ -51,10 +51,11 @@
   "dependencies": {
     "@loopback/boot": "^3.1.2",
     "@loopback/core": "^2.13.1",
-    "@loopback/repository": "^3.3.0",
+    "@loopback/repository": "^3.7.3",
     "@loopback/rest": "^9.1.1",
     "@loopback/rest-explorer": "^3.0.5",
     "@loopback/service-proxy": "^3.0.5",
+    "loopback-connector-es": "^1.4.1",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
